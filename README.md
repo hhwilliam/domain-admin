@@ -53,6 +53,8 @@ $ source venv/bin/activate
 
 # 安装 domain-admin
 $ pip install domain-admin
+# (bug) 补充依赖
+pip install pytz-deprecation-shim
 
 # 升级到最新版本，可选
 $ pip3 install -U domain-admin -i https://pypi.org/simple
@@ -72,7 +74,9 @@ $ gunicorn 'domain_admin.main:app'
 感谢[@miss85246](https://github.com/miss85246) 提供Docker支持
 
 ```bash
-$ docker run -p 8000:8000 mouday/domain-admin
+# 镜像缺少个依赖，需要重新构建下镜像
+$ docker build -t my-domain-admin .
+$ docker run -p 8000:8000 my-domain-admin
 
 # 后台运行
 $ docker run -d -p 8000:8000 mouday/domain-admin
