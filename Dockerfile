@@ -9,6 +9,7 @@ RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && apk add --no-cache libffi openssl \
     && pip install --no-cache-dir --upgrade pip setuptools wheel\
     && pip install --no-cache-dir -r requirements/production.txt \
-    && apk del .build-deps
+    && apk del .build-deps \
+    && pip install pytz-deprecation-shim
 
 CMD gunicorn --bind '0.0.0.0:8000' 'domain_admin.main:app'
